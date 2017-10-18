@@ -3,6 +3,7 @@ package edu.orangecoastcollege.cs273.wheretonext;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -61,6 +62,7 @@ public class CollegeListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CollegeDetailsActivity.class);
 
         College selectedCollege = (College)view.getTag();
+
         intent.putExtra("Name", selectedCollege.getName());
         intent.putExtra("Population", selectedCollege.getPopulation());
         intent.putExtra("Tuition", selectedCollege.getTuition());
@@ -78,6 +80,7 @@ public class CollegeListActivity extends AppCompatActivity {
                 Double.parseDouble(tuitionEditText.getText().toString()),
                 collegeRatingBar.getRating());
         db.addCollege(newCollege);
+        collegesList.add(newCollege);
         mCollegeListAdapter.notifyDataSetChanged();
     }
 

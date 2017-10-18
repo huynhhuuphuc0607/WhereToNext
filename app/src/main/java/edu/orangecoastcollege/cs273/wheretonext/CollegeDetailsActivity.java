@@ -31,8 +31,11 @@ public class CollegeDetailsActivity extends AppCompatActivity {
         Intent detailsIntent = getIntent();
         String name = detailsIntent.getStringExtra("Name");
         int population = detailsIntent.getIntExtra("Population", 0);
-        float tuition = detailsIntent.getFloatExtra("Tuition", 0.0f);
-        float rating = detailsIntent.getFloatExtra("Rating", 0.0f);
+
+        double tuition = detailsIntent.getDoubleExtra("Tuition", 0.0);
+        Log.e("WhereToNext", String.valueOf(tuition));
+        double rating = detailsIntent.getDoubleExtra("Rating", 0.0);
+        Log.e("WhereToNext", String.valueOf(rating));
         String imageName = detailsIntent.getStringExtra("ImageName");
 
         AssetManager am = this.getAssets();
@@ -52,6 +55,6 @@ public class CollegeDetailsActivity extends AppCompatActivity {
         collegeDetailsNameTextView.setText(name);
         collegeDetailsPopulationTextView.setText("Annual Enrollment: " + thousands.format(population));
         collegeDetailsTuitionTextView.setText("In-state Tuition: " + currency.format(tuition));
-        gameDetailsRatingBar.setRating(rating);
+        gameDetailsRatingBar.setRating((float) rating);
     }
 }
