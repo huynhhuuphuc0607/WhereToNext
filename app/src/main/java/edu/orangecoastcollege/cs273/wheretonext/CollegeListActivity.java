@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -75,13 +76,23 @@ public class CollegeListActivity extends AppCompatActivity {
     public void addCollege(View view) {
 
         // TODO: Implement the code for when the user clicks on the addCollegeButton
-        College newCollege = new College(nameEditText.getText().toString(),
-                Integer.parseInt(populationEditText.getText().toString()),
-                Double.parseDouble(tuitionEditText.getText().toString()),
-                collegeRatingBar.getRating());
-        db.addCollege(newCollege);
-        collegesList.add(newCollege);
-        mCollegeListAdapter.notifyDataSetChanged();
+        if(nameEditText.getText().toString().isEmpty()
+                || populationEditText.getText().toString().isEmpty()
+                || tuitionEditText.getText().toString().isEmpty())
+            Toast.makeText(this, R.string.empty_fields , Toast.LENGTH_SHORT).show();
+        else{
+            College newCollege = new College(nameEditText.getText().toString(),
+                    Integer.parseInt(populationEditText.getText().toString()),
+                    Double.parseDouble(tuitionEditText.getText().toString()),
+                    collegeRatingBar.getRating());
+            db.addCollege(newCollege);
+            collegesList.add(newCollege);
+            mCollegeListAdapter.notifyDataSetChanged();
+
+            nameEditText.setText("");
+            populationEditText.setText("");
+            tuitionEditText.setText("");
+        }
     }
 
 }
